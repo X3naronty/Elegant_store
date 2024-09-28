@@ -1,0 +1,286 @@
+@charset "UTF-8";
+/* Base */
+@import url("./blocks/*.scss");
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter18pt-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/Poppins-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter18pt-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter18pt-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/Poppins-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter18pt-Bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../fonts/SpaceGrotesk-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/Poppins-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --container-width: 1200px;
+  --container-padding-x: 20px;
+  --font-main: "Inter", sans-serif;
+  --font-accent: "Poppins", sans-serif;
+  --font-navigation: "Space Grotesk", sans-serif;
+  --background-color: white;
+  --text-color: #000;
+  --text-color-accent: #ac182c;
+  --text-color-alt: #6C7275;
+  --text-color-opposite: #FEFEFE;
+}
+
+/**
+  Нормализация блочной модели
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+/**
+   Убираем внутренние отступы слева тегам списков,
+   у которых есть атрибут class
+  */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+   Убираем внешние отступы body и двум другим тегам,
+   у которых есть атрибут class
+  */
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/**
+   Убираем внешние отступы вертикали нужным тегам,
+   у которых есть атрибут class
+  */
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+   Убираем стандартный маркер маркированному списку,
+   у которого есть атрибут class
+  */
+:where(ul[class]) {
+  list-style: none;
+}
+
+/**
+   Упрощаем работу с изображениями
+  */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/**
+	Font inherit for interactive elements
+*/
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+dialog {
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  max-width: inherit;
+  max-height: inherit;
+}
+
+/**
+   Force svg to the same color, excepting data-svg-multicolor(custom attribute)
+  */
+svg:not([data-svg-multicolor]) *[fill] {
+  fill: currentColor;
+}
+
+svg:not([data-svg-multicolor]) *[stroke] {
+  stroke: currentColor;
+}
+
+/**
+   Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+  */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+   Удаляем все анимации и переходы для людей,  /**
+     Унифицированный интерлиньяж
+    */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+html {
+  background-color: white;
+}
+
+body {
+  font-size: clamp(16px, 1.0416666667vw, 20px);
+  color: var(--text-color);
+  font-family: var(--font-main);
+  font-weight: normal;
+  background-color: var(--background-color);
+  line-height: var(--line-height);
+}
+
+button {
+  border: none;
+}
+
+p:where(:not([class])) {
+  color: var(--text-color-alt);
+}
+p:where(:not([class])):where(:not(:last-child):not([class])) {
+  margin-bottom: 15px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  line-height: var(--line-height-small);
+}
+
+h1,
+.h1 {
+  font-size: clamp(42px, 3.75vw, 72px);
+}
+
+h2,
+.h2 {
+  font-size: clamp(42px, 3.3333333333vw, 64px);
+}
+
+h3,
+.h3 {
+  font-size: clamp(28px, 2.9166666667vw, 56px);
+}
+
+h4,
+.h4 {
+  font-size: clamp(26px, 1.4583333333vw, 28px);
+}
+
+h5,
+.h5 {
+  font-size: clamp(22px, 1.25vw, 24px);
+}
+
+a,
+button,
+input,
+textarea,
+svg {
+  transition-duration: var(--transition-duration);
+}
+
+g[data-vector-monochrome] *[fill] {
+  fill: currentColor;
+}
+
+g[data-vector-monochrome] *[stroke] {
+  stroke: currentColor;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  -webkit-clip-path: inset(100%) !important;
+          clip-path: inset(100%) !important;
+  clip: rect(0 0 0 0) !important;
+  overflow: hidden !important;
+}
+
+.container {
+  max-width: calc(var(--container-width) + 2 * var(--container-padding-x));
+  padding-inline: var(--container-padding-x);
+  margin-inline: auto;
+}
+@media (max-width: 780px) {
+  .container {
+    padding-inline: 15px;
+  }
+}
+
+/* Blocks *//*# sourceMappingURL=main.css.map */
